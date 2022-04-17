@@ -10,21 +10,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2_MobileApplication">
         <activity
-            android:name=".controller.HomeScreenActivity"
-            android:label="Home"
-            android:parentActivityName=".main.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".main.MainActivity"
-            android:label="ABM2 Mobile Application"
-            android:exported="true">
+            android:exported="true"
+            android:label="ABM2 Mobile Application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".controller.HomeScreenActivity"
+            android:exported="false"
+            android:label="Home" />
+        <activity
+            android:name=".controller.TermScreenActivity"
+            android:exported="false"
+            android:label="Terms View"
+            android:parentActivityName=".controller.HomeScreenActivity" />
+        <activity
+            android:name=".controller.TermDetail"
+            android:exported="false"
+            android:label="Terms Editor"
+            android:parentActivityName=".controller.TermScreenActivity" />
+        <activity
+            android:name=".controller.CourseScreenActivity"
+            android:exported="false"
+            android:label="Courses"
+            android:parentActivityName=".controller.HomeScreenActivity" />
+        <activity
+            android:name=".controller.CourseDetail"
+            android:exported="false"
+            android:label="Course Editor"
+            android:parentActivityName=".controller.CourseScreenActivity" />
     </application>
 
 </manifest>

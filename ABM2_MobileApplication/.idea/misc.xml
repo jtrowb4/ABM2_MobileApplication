@@ -7,9 +7,24 @@
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_add_icon_24.xml" value="0.1" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.195" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_main_icon_24.xml" value="0.1" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_assignment_24.xml" value="0.111" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_help_center_24.xml" value="0.111" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_library_books_24.xml" value="0.111" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_list_alt_24.xml" value="0.111" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_school_24.xml" value="0.111" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_detail.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_screen.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home_screen.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home_screen.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_detail.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_list_item.xml" value="0.10371376811594203" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_screen.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/course_list_item.xml" value="0.17824074074074073" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/term_list_item.xml" value="0.1" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/appbar_menu.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/appbar_menu_term.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/menu_share_notify.xml" value="0.20052083333333334" />
       </map>
     </option>
   </component>

@@ -5,22 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.HomeScreenActivity"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="67dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="50dp"
-        android:clickable="true"
-        android:theme="@style/Theme.ABM2_MobileApplication"
-        android:tint="@color/primary_light"
-        app:backgroundTint="@color/primary_light"
-        app:fabSize="auto"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/primary_dark"
-        app:srcCompat="@drawable/ic_add_icon_24"
-        app:useCompatPadding="true" />
+    <TableLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints">
+        <TableRow
+            android:onClick="toTermScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
+                android:layout_margin="15dp"
+                app:srcCompat="@drawable/ic_twotone_school_24"
+                tools:layout_editor_absoluteX="122dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="Terms"
+                android:textAlignment="viewStart"
+                android:textSize="34sp"
+                android:typeface="normal"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                tools:layout_editor_absoluteY="60dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="toCourseScreen">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
+                android:layout_margin="15dp"
+                app:srcCompat="@drawable/ic_twotone_library_books_24"
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="159dp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="Courses"
+                android:textAlignment="viewStart"
+                android:textSize="34sp"
+                android:typeface="normal"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                tools:layout_editor_absoluteY="216dp" />
+        </TableRow>
+        <TableRow
+            android:onClick="toTermScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
+                android:layout_margin="15dp"
+                app:srcCompat="@drawable/ic_twotone_assignment_24"
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="303dp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="Assignments"
+                android:textAlignment="viewStart"
+                android:textSize="34sp"
+                android:typeface="normal"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                tools:layout_editor_absoluteY="331dp" />
+        </TableRow>
+        <TableRow
+            android:onClick="toTermScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
+                android:layout_margin="15dp"
+                android:onClick="toTermScreen"
+                app:srcCompat="@drawable/ic_twotone_help_center_24"
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="447dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="Help"
+                android:textAlignment="viewStart"
+                android:textSize="34sp"
+                android:typeface="normal"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                tools:layout_editor_absoluteY="399dp"
+                android:layout_marginTop="25dp" />
+        </TableRow>
+    </TableLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

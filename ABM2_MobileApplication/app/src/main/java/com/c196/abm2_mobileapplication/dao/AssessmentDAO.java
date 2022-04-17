@@ -10,6 +10,7 @@ import androidx.room.Update;
 import com.c196.abm2_mobileapplication.model.Assessment;
 
 import java.util.List;
+
 @Dao
 public interface AssessmentDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
