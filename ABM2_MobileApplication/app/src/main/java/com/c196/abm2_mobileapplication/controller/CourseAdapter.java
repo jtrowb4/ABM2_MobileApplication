@@ -69,11 +69,11 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
             holder.courseItemView.setText(courseTitle);
         }
         else{
-            holder.courseItemView.setText("No Term Title");
+            holder.courseItemView.setText("No Course Title");
         }
     }
 
-    public void setTerms(List<Course> courses){
+    public void setCourses(List<Course> courses){
         mCourses = courses;
         notifyDataSetChanged();
     }

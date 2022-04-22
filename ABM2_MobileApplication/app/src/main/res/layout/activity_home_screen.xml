@@ -75,7 +75,7 @@
                 tools:layout_editor_absoluteY="216dp" />
         </TableRow>
         <TableRow
-            android:onClick="toTermScreen"
+            android:onClick="toAssessmentScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -97,7 +97,7 @@
                 android:fontFamily="sans-serif-light"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:text="Assignments"
+                android:text="Assessments"
                 android:textAlignment="viewStart"
                 android:textSize="34sp"
                 android:typeface="normal"
@@ -105,7 +105,6 @@
                 tools:layout_editor_absoluteY="331dp" />
         </TableRow>
         <TableRow
-            android:onClick="toTermScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

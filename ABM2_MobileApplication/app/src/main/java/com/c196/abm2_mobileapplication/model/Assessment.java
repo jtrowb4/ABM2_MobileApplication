@@ -10,12 +10,14 @@ public class Assessment {
     private int assessmentID;
 
     private String assessmentTitle;
+    private String assessmentType;
     private String startDate;
     private String endDate;
 
-    public Assessment(int assessmentID, String assessmentTitle, String startDate, String endDate) {
+    public Assessment(int assessmentID, String assessmentTitle, String assessmentType, String startDate, String endDate) {
         this.assessmentID = assessmentID;
         this.assessmentTitle = assessmentTitle;
+        this.assessmentType = assessmentType;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -34,6 +36,14 @@ public class Assessment {
 
     public void setAssessmentTitle(String assessmentTitle) {
         this.assessmentTitle = assessmentTitle;
+    }
+
+    public String getAssessmentType() {
+        return assessmentType;
+    }
+
+    public void setAssessmentType(String assessmentType) {
+        this.assessmentType = assessmentType;
     }
 
     public String getStartDate() {

@@ -12,19 +12,28 @@
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_library_books_24.xml" value="0.111" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_list_alt_24.xml" value="0.111" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_school_24.xml" value="0.111" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_detail.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_assessment_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_detail.xml" value="0.33" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_screen.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home_screen.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_home_screen.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_detail.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_list_item.xml" value="0.10371376811594203" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_term_screen.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/assessment_list_item.xml" value="0.33" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/course_list_item.xml" value="0.17824074074074073" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/term_list_item.xml" value="0.1" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/fragment_editor.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/fragment_editor_assessment.xml" value="0.33" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/popup_new_assesment.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/popup_new_term.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/term_list_item.xml" value="0.33" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/appbar_menu.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/appbar_menu_term.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/menu/menu_share_notify.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/jamet/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1" />
       </map>
     </option>
   </component>

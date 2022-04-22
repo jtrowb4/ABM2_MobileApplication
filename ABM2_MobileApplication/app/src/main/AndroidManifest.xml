@@ -26,7 +26,7 @@
         <activity
             android:name=".controller.TermScreenActivity"
             android:exported="false"
-            android:label="Terms View"
+            android:label="Terms"
             android:parentActivityName=".controller.HomeScreenActivity" />
         <activity
             android:name=".controller.TermDetail"
@@ -43,6 +43,16 @@
             android:exported="false"
             android:label="Course Editor"
             android:parentActivityName=".controller.CourseScreenActivity" />
+        <activity
+            android:name=".controller.AssessmentScreenActivity"
+            android:exported="false"
+            android:label="Assessments"
+            android:parentActivityName=".controller.HomeScreenActivity" />
+        <activity
+            android:name=".controller.AssessmentDetail"
+            android:exported="false"
+            android:label="Assessment Editor"
+            android:parentActivityName=".controller.AssessmentScreenActivity" />
     </application>
 
 </manifest>

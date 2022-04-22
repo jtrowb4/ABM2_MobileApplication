@@ -75,6 +75,10 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         notifyDataSetChanged();
     }
 
+    public Term getTermPostion (int postion){
+        return mTerms.get(postion);
+    }
+
     @Override
     public int getItemCount() {
         if(mTerms != null)

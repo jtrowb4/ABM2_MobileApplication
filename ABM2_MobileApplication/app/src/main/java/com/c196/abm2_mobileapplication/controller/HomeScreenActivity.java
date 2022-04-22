@@ -23,7 +23,12 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     public void toCourseScreen(View view) {
-        Intent termScreenIntent = new Intent(HomeScreenActivity.this, CourseScreenActivity.class);
-        startActivity(termScreenIntent);
+        Intent courseScreenIntent = new Intent(HomeScreenActivity.this, CourseScreenActivity.class);
+        startActivity(courseScreenIntent);
+    }
+
+    public void toAssessmentScreen(View view) {
+        Intent assessmentScreenIntent = new Intent(HomeScreenActivity.this, AssessmentScreenActivity.class);
+        startActivity(assessmentScreenIntent);
     }
 }

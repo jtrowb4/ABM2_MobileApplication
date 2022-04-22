@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.c196.abm2_mobileapplication.R;
@@ -18,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
@@ -41,54 +44,62 @@ public class CourseDetail extends AppCompatActivity {
     String instructorPhone;
     String instructorEmail;
 
+    String myFormat;
+    SimpleDateFormat dateFormat;
     final Calendar myCalendarStart = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
-
         repository = new Repository(getApplication());
-
-        editTitle = findViewById(R.id.courseTitleText);
-        editStartDate = findViewById(R.id.courseStartText);
-        String myFormat = "MM-dd-yyyy";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
-        editStartDate.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Date date;
-                String dateString = editStartDate.getText().toString();
-                if(dateString.equals("")){
-                    dateString = "01-01-2022";
-                }
-                try{
-                    myCalendarStart.setTime(dateFormat.parse(dateString));
-                }catch(ParseException e){
-                    e.printStackTrace();
-                }
-                new DatePickerDialog(CourseDetail.this, startDate, myCalendarStart.get(Calendar.YEAR),
-                        myCalendarStart.get(Calendar.MONTH), myCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
+        List<Course> courses = repository.getAllCourse();
+        for (Course course: courses)
+        {
+            int i = getIntent().getIntExtra("id", -1);
+            if (course.getCourseID() == i && course.getCourseID() != -1){
+                setTitle(course.getCourseTitle());
+                break;
             }
+            else
+            {
+                setTitle("A Title");
+            }
+        }
+        editTitle = findViewById(R.id.courseTitleText);
+        myFormat = "MM/dd/yyyy";
+        dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        editStartDate = findViewById(R.id.courseStartText);
+        editStartDate.setOnClickListener(view -> {
+            Date date;
+            String dateString = editStartDate.getText().toString();
+            if(dateString.equals("")){
+                dateString = "01/01/2022";
+            }
+            try{
+                myCalendarStart.setTime(dateFormat.parse(dateString));
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+            new DatePickerDialog(CourseDetail.this, startDate, myCalendarStart.get(Calendar.YEAR),
+                    myCalendarStart.get(Calendar.MONTH), myCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
         });
         editEndDate = findViewById(R.id.courseEndText);
-        editStartDate.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Date date;
-                String dateString = editStartDate.getText().toString();
-                if(dateString.equals("")){
-                    dateString = "01-01-2022";
-                }
-                try{
-                    myCalendarStart.setTime(dateFormat.parse(dateString));
-                }catch(ParseException e){
-                    e.printStackTrace();
-                }
-                new DatePickerDialog(CourseDetail.this, endDate, myCalendarEnd.get(Calendar.YEAR),
-                        myCalendarEnd.get(Calendar.MONTH), myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
+        editEndDate.setOnClickListener(view -> {
+            Date date;
+            String dateString = editEndDate.getText().toString();
+              if(dateString.equals("")){
+                dateString = "01/01/2022";
             }
+            try{
+                myCalendarEnd.setTime(dateFormat.parse(dateString));
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+            new DatePickerDialog(CourseDetail.this, endDate, myCalendarEnd.get(Calendar.YEAR),
+                    myCalendarEnd.get(Calendar.MONTH), myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
         });
         editStatus = findViewById(R.id.courseStatusText);
         editInstructorName = findViewById(R.id.instructorNameText);
@@ -97,20 +108,38 @@ public class CourseDetail extends AppCompatActivity {
 
         courseID = getIntent().getIntExtra("id", -1);
         title = getIntent().getStringExtra("title");
-        startDate = getIntent().getParcelableExtra("start date");
-        endDate = getIntent().getParcelableExtra("end date");
+        startDate = (datePicker, year, month, day) -> {
+            myCalendarStart.set(Calendar.YEAR,year);
+            myCalendarStart.set(Calendar.MONTH, month);
+            myCalendarStart.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel(editStartDate, myCalendarStart);
+        };
+        endDate = (datePicker, year, month, day) -> {
+            myCalendarEnd.set(Calendar.YEAR,year);
+            myCalendarEnd.set(Calendar.MONTH, month);
+            myCalendarEnd.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel(editEndDate, myCalendarEnd);
+        };
         status = getIntent().getStringExtra("status");
         instructorName = getIntent().getStringExtra("instructor name");
         instructorPhone = getIntent().getStringExtra("phone");
         instructorEmail = getIntent().getStringExtra("email");
 
+
         editTitle.setText(title);
-        editStartDate.setText(;
-//        editEndDate.setText(endDate.toString());
         editStatus.setText(status);
         editInstructorName.setText(instructorName);
         editInstructorPhone.setText(instructorPhone);
         editInstructorEmail.setText(instructorEmail);
+
+    }
+
+    private void updateLabel(EditText text, Calendar calendar){
+        String myFormat = "MM/dd/yyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+
+        text.setText(dateFormat.format(calendar.getTime()));
+
     }
 
     public void onSave(View view){

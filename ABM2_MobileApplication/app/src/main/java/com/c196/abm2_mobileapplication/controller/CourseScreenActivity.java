@@ -28,6 +28,6 @@ public class CourseScreenActivity  extends AppCompatActivity {
         CourseAdapter adapter = new CourseAdapter(getApplicationContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter.setTerms(courses);
+        adapter.setCourses(courses);
     }
 }

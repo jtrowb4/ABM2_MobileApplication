@@ -3,11 +3,11 @@
     <color name="primary">#0a872d</color>
     <color name="primary_light">#4fb85a</color>
     <color name="primary_dark">#005900</color>
-    <color name="primary_text">#ffffff</color>
-    <color name="secondary">#eeeeee</color>
-    <color name="secondary_light">#ffffff</color>
-    <color name="secondary_dark">#bcbcbc</color>
-    <color name="secondary_text">#FF000000</color>
+    <color name="primary_text">#DADADA</color>
+    <color name="secondary">#90CA88</color>
+    <color name="secondary_light">#DADADA</color>
+    <color name="secondary_dark">#388E3C</color>
+    <color name="secondary_text">#151515</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
