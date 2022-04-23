@@ -35,7 +35,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_editor_assessment);
+        //setContentView(R.layout.fragment_editor_assessment);
 
         repository = new Repository(getApplication());
 
@@ -44,7 +44,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         types.add(1,"Objective");
 
         editTitle = findViewById(R.id.assessmentTitleText);
-        editTypeSpinner = findViewById(R.id.assessmentSpinner);
+        //editTypeSpinner = findViewById(R.id.assessmentSpinner);
         editTypeSpinner.setOnItemSelectedListener(this);
         editStartDate = findViewById(R.id.termStartText);
         editEndDate = findViewById(R.id.termEndText);

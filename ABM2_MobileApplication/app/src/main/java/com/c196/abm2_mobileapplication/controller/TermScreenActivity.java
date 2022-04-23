@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,7 +29,10 @@ import com.c196.abm2_mobileapplication.model.Term;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class TermScreenActivity extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class TermScreenActivity extends AppCompatActivity {
     EditText editTitle;
     EditText editStartDate;
     EditText editEndDate;
+    EditText tempText;
     Button saveButton;
     Button cancelButton;
 
@@ -122,9 +128,43 @@ public class TermScreenActivity extends AppCompatActivity {
         editStartDate = (EditText) newTermPopup.findViewById(R.id.termStartText);
         editEndDate = (EditText) newTermPopup.findViewById(R.id.termEndText);
 
+        final Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
+                updateLabel(tempText);
+            }
+
+            private void updateLabel(EditText et){
+                String dateFormat = "MM-dd-yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.US);
+                et.setText(simpleDateFormat.format(myCalendar.getTime()));
+            }
+        };
+        editStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempText = editStartDate;
+                new DatePickerDialog(TermScreenActivity.this, date,
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                editStartDate = tempText;
+            }
+        });
+        editEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempText = editEndDate;
+                new DatePickerDialog(TermScreenActivity.this, date,
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                editEndDate = tempText;
+            }
+        });
+
         saveButton = (Button) newTermPopup.findViewById(R.id.saveButton);
         cancelButton = (Button) newTermPopup.findViewById(R.id.cancelButton);
-
 
         dialogBuilder.setView(newTermPopup);
         alertDialog = dialogBuilder.create();
@@ -143,11 +183,6 @@ public class TermScreenActivity extends AppCompatActivity {
                 repo.insertTerm(term);
                 recreate();
                 alertDialog.dismiss();
-/*            else{
-                term = new Term (termID, editTitle.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-                repository.updateTerm(term);
-            }*/
-
             }
         });
 
@@ -157,7 +192,6 @@ public class TermScreenActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

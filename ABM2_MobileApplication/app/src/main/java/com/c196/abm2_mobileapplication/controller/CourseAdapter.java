@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.model.Course;
-import com.c196.abm2_mobileapplication.model.Term;
 
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
     @NonNull
     @Override
     public CourseAdapter.CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflator.inflate(R.layout.course_list_item, parent, false);
+        View view = mInflator.inflate(R.layout.list_item_course, parent, false);
         return new CourseAdapter.CourseViewHolder(view);
     }
 

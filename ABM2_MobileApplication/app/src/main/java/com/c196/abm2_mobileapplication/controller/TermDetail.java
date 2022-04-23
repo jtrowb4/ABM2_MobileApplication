@@ -8,43 +8,35 @@ import android.widget.EditText;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
+import com.c196.abm2_mobileapplication.model.Course;
 import com.c196.abm2_mobileapplication.model.Term;
+
+import java.util.List;
 
 public class TermDetail extends AppCompatActivity {
 
-    Repository repository;
-    //EditText editTermID;
-    EditText editTitle;
-    EditText editStartDate;
-    EditText editEndDate;
-
-    int termID;
-    String title;
-    String startDate;
-    String endDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_detail);
-
-        repository = new Repository(getApplication());
-
-        editTitle = findViewById(R.id.termTitleText);
-        editStartDate = findViewById(R.id.termStartText);
-        editEndDate = findViewById(R.id.termEndText);
-
-        termID = getIntent().getIntExtra("id", -1);
-        title = getIntent().getStringExtra("title");
-        startDate = getIntent().getStringExtra("start date");
-        endDate = getIntent().getStringExtra("end date");
-
-        editTitle.setText(title);
-        editStartDate.setText(startDate);
-        editEndDate.setText(endDate);
+        setContentView(R.layout.activity_term_screen);
+        Repository repository = new Repository(getApplication());
+        List<Term> terms = repository.getAllTerms();
+        for (Term term: terms)
+        {
+            int i = getIntent().getIntExtra("id", -1);
+            if (term.getTermID() == i && term.getTermID() != -1){
+                setTitle(term.getTermTitle());
+                break;
+            }
+            else
+            {
+                setTitle("A Title");
+            }
+        }
     }
 
-    public void onSave(View view){
+   /* public void onSave(View view){
         Term term;
         if(termID == -1){
             int newID = 0;
@@ -55,6 +47,6 @@ public class TermDetail extends AppCompatActivity {
             term = new Term (termID, editTitle.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
             repository.updateTerm(term);
         }
+     }*/
 
-    }
 }
