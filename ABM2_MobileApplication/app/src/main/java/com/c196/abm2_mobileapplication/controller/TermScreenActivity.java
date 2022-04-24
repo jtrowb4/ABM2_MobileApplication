@@ -3,25 +3,19 @@ package com.c196.abm2_mobileapplication.controller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
@@ -49,7 +43,7 @@ public class TermScreenActivity extends AppCompatActivity {
     Button saveButton;
     Button cancelButton;
 
-    //for saving assessment to repo
+    //for saving term to repo
     Repository repo;
     int termID;
     String termTitle;
@@ -60,8 +54,8 @@ public class TermScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_screen);
-        RecyclerView recyclerView = findViewById(R.id.termRecyclerView);
+        setContentView(R.layout.activity_list_screen);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         repo = new Repository(getApplication());
         List<Term> terms = repo.getAllTerms();
         TermAdapter adapter = new TermAdapter(getApplicationContext());
@@ -86,7 +80,7 @@ public class TermScreenActivity extends AppCompatActivity {
         });
 
         final Term[] deletedTerm = {null};
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -96,25 +90,23 @@ public class TermScreenActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-                switch (direction){
-                    case ItemTouchHelper.LEFT:
-                        Term termSelected;
-                        termSelected = adapter.getTermPostion(viewHolder.getAdapterPosition());
-                        deletedTerm[0] = termSelected;
-                        terms.remove(termSelected);
-                        repo.deleteTerm(termSelected);
-                        Snackbar.make(recyclerView, "Term Deleted", Snackbar.LENGTH_LONG)
-                                .setAction("Undo", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        terms.add(deletedTerm[0]);
-                                        repo.insertTerm(deletedTerm[0]);
-                                        recreate();
-                                    }
-                                }).show();
-                        break;
-                    case ItemTouchHelper.RIGHT:
-                        //Modify
+                if (direction == ItemTouchHelper.LEFT) {
+                    Term termSelected;
+                    termSelected = adapter.getTermPosition(viewHolder.getAdapterPosition());
+                    deletedTerm[0] = termSelected;
+                    terms.remove(termSelected);
+                    repo.deleteTerm(termSelected);
+                    Snackbar.make(recyclerView, "Term Deleted", Snackbar.LENGTH_LONG)
+                            .setAction("Undo", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    terms.add(deletedTerm[0]);
+                                    repo.insertTerm(deletedTerm[0]);
+                                    recreate();
+                                }
+                            }).show();
+                    //case ItemTouchHelper.RIGHT:
+                    //Modify
                 }
             }
 
@@ -195,7 +187,7 @@ public class TermScreenActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate((R.menu.appbar_menu_term), menu);
+        getMenuInflater().inflate((R.menu.appbar_menu_detail), menu);
         return true;
     }
 
@@ -208,7 +200,8 @@ public class TermScreenActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
    }
 
-    public void toTermEditor(View view) {
+   //Use for Modify Menu Item
+    public void toEditor(View view) {
         Intent editorScreenIntent = new Intent(TermScreenActivity.this, TermDetail.class);
         startActivity(editorScreenIntent);
     }

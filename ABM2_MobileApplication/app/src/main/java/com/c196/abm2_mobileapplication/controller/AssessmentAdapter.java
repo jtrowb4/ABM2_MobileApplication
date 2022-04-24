@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.model.Assessment;
+import com.c196.abm2_mobileapplication.model.Course;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
 
         private AssessmentViewHolder(View view) {
             super(view);
-            assessmentItemView = view.findViewById(R.id.assessmentItemText);
+            assessmentItemView = view.findViewById(R.id.displayItemText);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -51,7 +52,7 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
     @NonNull
     @Override
     public AssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflator.inflate(R.layout.list_item_assessment, parent, false);
+        View view = mInflator.inflate(R.layout.list_item_display, parent, false);
         return new AssessmentAdapter.AssessmentViewHolder(view);
     }
 
@@ -70,6 +71,10 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
     public void setAssessments(List<Assessment> assessments){
         mAssessments = assessments;
         notifyDataSetChanged();
+    }
+
+    public Assessment getAssessmentPosition (int postion){
+        return mAssessments.get(postion);
     }
 
     @Override

@@ -23,13 +23,13 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         private TermViewHolder(View view){
             super(view);
-            termItemView = view.findViewById(R.id.termItemText);
+            termItemView = view.findViewById(R.id.displayItemText);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final Term currentTerm = mTerms.get(position);
-                    Intent intent = new Intent(context,TermDetail.class); //TermScreenActivity?
+                    Intent intent = new Intent(context,TermDetail.class); // load on modify
                     intent.putExtra("id", currentTerm.getTermID());
                     intent.putExtra("title", currentTerm.getTermTitle());
                     intent.putExtra("start date", currentTerm.getStartDate());
@@ -54,7 +54,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     @NonNull
     @Override
     public TermAdapter.TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflator.inflate(R.layout.list_item_term, parent, false);
+        View view = mInflator.inflate(R.layout.list_item_display, parent, false);
         return new TermViewHolder(view);
     }
 
@@ -75,8 +75,8 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         notifyDataSetChanged();
     }
 
-    public Term getTermPostion (int postion){
-        return mTerms.get(postion);
+    public Term getTermPosition(int position){
+        return mTerms.get(position);
     }
 
     @Override

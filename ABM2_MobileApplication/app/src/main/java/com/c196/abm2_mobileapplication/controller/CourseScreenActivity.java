@@ -18,6 +18,8 @@ import java.util.List;
 
 public class CourseScreenActivity  extends AppCompatActivity {
 
+    //overview page
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

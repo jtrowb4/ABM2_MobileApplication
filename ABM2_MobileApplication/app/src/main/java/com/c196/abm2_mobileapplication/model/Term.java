@@ -58,16 +58,4 @@ public class Term {
         this.endDate = endDate;
     }
 
-
-    public void addAssociatedCourse(Course course){
-        associatedCourses.add(course);
-
-    }
-    public boolean deleteAssociatedCourse(Course course){
-        return associatedCourses.remove(course);
-    }
-
-    public ArrayList<Course> getAllAssociatedAppointment(){
-        return associatedCourses;
-    }
 }

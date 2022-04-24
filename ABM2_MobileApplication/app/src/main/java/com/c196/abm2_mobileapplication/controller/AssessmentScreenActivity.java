@@ -9,23 +9,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
 import com.c196.abm2_mobileapplication.model.Assessment;
-import com.c196.abm2_mobileapplication.model.Term;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AssessmentScreenActivity extends AppCompatActivity {
+    //refactor to make Assessment landing page
+
     //FAB items
     boolean isShowing = false;
     FloatingActionButton addAssessment;
@@ -54,8 +52,8 @@ public class AssessmentScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_screen);
-        RecyclerView recyclerView = findViewById(R.id.assessmentRecyclerView);
+        setContentView(R.layout.activity_list_screen);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Repository repo = new Repository(getApplication());
         List<Assessment> assessments = repo.getAllAssessments();
         AssessmentAdapter adapter = new AssessmentAdapter(getApplicationContext());
@@ -81,7 +79,7 @@ public class AssessmentScreenActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate((R.menu.appbar_menu_term), menu);
+        getMenuInflater().inflate((R.menu.appbar_menu_detail), menu);
         return true;
     }
 
@@ -96,7 +94,7 @@ public class AssessmentScreenActivity extends AppCompatActivity {
 
     public void newAssessmentDialog(){
         dialogBuilder = new AlertDialog.Builder(this);
-        View newAssessmentPopup = getLayoutInflater().inflate(R.layout.popup_new_assesment, null);
+        View newAssessmentPopup = getLayoutInflater().inflate(R.layout.popup_new_assessment, null);
         editTitle = (EditText) newAssessmentPopup.findViewById(R.id.assessmentTitleText);
         //editTypeSpinner = (Spinner) newAssessmentPopup.findViewById(R.id.assessmentTypeSpinner);
         editStartDate = (EditText) newAssessmentPopup.findViewById(R.id.assessmentStart);
@@ -126,9 +124,9 @@ public class AssessmentScreenActivity extends AppCompatActivity {
             startDate = editStartDate.getText().toString();
             endDate = editEndDate.getText().toString();
             Assessment assessment;
-            if(assessmentID == -1){
+   /*         if(assessmentID == -1){
                 int newID = 0;
-                assessment = new Assessment(newID, assessmentTitle, assessmentType, startDate, endDate);
+                assessment = new Assessment(newID, assessmentTitle, assessmentType, startDate, endDate, courseID);
                 repository.insertAssessment(assessment);
             }
 /*            else{

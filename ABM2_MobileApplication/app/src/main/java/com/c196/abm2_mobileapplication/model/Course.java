@@ -1,6 +1,7 @@
 package com.c196.abm2_mobileapplication.model;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses")
@@ -8,6 +9,7 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     private int courseID;
 
+    private int termID;
     private String courseTitle;
     private String startDate;
     private String endDate;
@@ -16,7 +18,7 @@ public class Course {
     private String instructorPhone;
     private String instructorEmail;
 
-    public Course(int courseID, String courseTitle, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail) {
+    public Course(int courseID, String courseTitle, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail, int termID) {
         this.courseID = courseID;
         this.courseTitle = courseTitle;
         this.startDate = startDate;
@@ -25,6 +27,7 @@ public class Course {
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
+        this.termID = termID;
     }
 
     public int getCourseID() {
@@ -89,6 +92,14 @@ public class Course {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+
+    public int getTermID() {
+        return termID;
+    }
+
+    public void setTermID(int termID) {
+        this.termID = termID;
     }
 }
 

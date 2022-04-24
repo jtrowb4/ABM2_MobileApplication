@@ -1,6 +1,11 @@
 package com.c196.abm2_mobileapplication.controller;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -8,157 +13,238 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
+import com.c196.abm2_mobileapplication.model.Assessment;
 import com.c196.abm2_mobileapplication.model.Course;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
 
-    Repository repository;
-    //EditText editCourseID;
+    //Contains information on Course Selected
+    //Contains list of Assessments
+
+    //FAB items
+    boolean isShowing = false;
+    FloatingActionButton addAssessment;
+    //DialogBox items
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog alertDialog;
     EditText editTitle;
     EditText editStartDate;
     EditText editEndDate;
-    EditText editStatus;
-    EditText editInstructorName;
-    EditText editInstructorPhone;
-    EditText editInstructorEmail;
+    EditText tempText;
+    RadioGroup assessmentGroup;
+    RadioButton paButton;
+    RadioButton oaButton;
+    Button saveButton;
+    Button cancelButton;
 
-    int courseID;
-    String title;
-    DatePickerDialog.OnDateSetListener startDate;
-    DatePickerDialog.OnDateSetListener endDate;
-    String status;
-    String instructorName;
-    String instructorPhone;
-    String instructorEmail;
 
-    String myFormat;
-    SimpleDateFormat dateFormat;
-    final Calendar myCalendarStart = Calendar.getInstance();
-    final Calendar myCalendarEnd = Calendar.getInstance();
+    //for saving assessment to repo
+    Repository repo;
+    int assessmentID;
+    String assessmentTitle;
+    String assessmentType;
+    String startDate;
+    String endDate;
+
+    Course currentCourse;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_detail);
-        repository = new Repository(getApplication());
-        List<Course> courses = repository.getAllCourse();
-        for (Course course: courses)
-        {
+        setContentView(R.layout.activity_list_screen);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        repo = new Repository(getApplication());
+        List<Course> courses = repo.getAllCourse();
+        for (Course course : courses) {
             int i = getIntent().getIntExtra("id", -1);
-            if (course.getCourseID() == i && course.getCourseID() != -1){
+            if (course.getTermID() == i && course.getTermID() != -1) {
                 setTitle(course.getCourseTitle());
+                currentCourse = course;
                 break;
-            }
-            else
-            {
+            } else {
                 setTitle("A Title");
             }
         }
-        editTitle = findViewById(R.id.courseTitleText);
-        myFormat = "MM/dd/yyyy";
-        dateFormat = new SimpleDateFormat(myFormat, Locale.US);
-        editStartDate = findViewById(R.id.courseStartText);
-        editStartDate.setOnClickListener(view -> {
-            Date date;
-            String dateString = editStartDate.getText().toString();
-            if(dateString.equals("")){
-                dateString = "01/01/2022";
+        ArrayList<Assessment> associatedAssessments = new ArrayList<>();
+        List<Assessment> assessments = repo.getAllAssessments();
+        for (Assessment assessment : assessments) {
+
+            if (assessment.getCourseID() == currentCourse.getCourseID()) {
+                associatedAssessments.add(assessment);
             }
-            try{
-                myCalendarStart.setTime(dateFormat.parse(dateString));
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
-            new DatePickerDialog(CourseDetail.this, startDate, myCalendarStart.get(Calendar.YEAR),
-                    myCalendarStart.get(Calendar.MONTH), myCalendarStart.get(Calendar.DAY_OF_MONTH)).show();
-        });
-        editEndDate = findViewById(R.id.courseEndText);
-        editEndDate.setOnClickListener(view -> {
-            Date date;
-            String dateString = editEndDate.getText().toString();
-              if(dateString.equals("")){
-                dateString = "01/01/2022";
-            }
-            try{
-                myCalendarEnd.setTime(dateFormat.parse(dateString));
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
-            new DatePickerDialog(CourseDetail.this, endDate, myCalendarEnd.get(Calendar.YEAR),
-                    myCalendarEnd.get(Calendar.MONTH), myCalendarEnd.get(Calendar.DAY_OF_MONTH)).show();
-        });
-        editStatus = findViewById(R.id.courseStatusText);
-        editInstructorName = findViewById(R.id.instructorNameText);
-        editInstructorPhone = findViewById(R.id.instructorPhoneText);
-        editInstructorEmail = findViewById(R.id.instructorEmailText);
-
-        courseID = getIntent().getIntExtra("id", -1);
-        title = getIntent().getStringExtra("title");
-        startDate = (datePicker, year, month, day) -> {
-            myCalendarStart.set(Calendar.YEAR,year);
-            myCalendarStart.set(Calendar.MONTH, month);
-            myCalendarStart.set(Calendar.DAY_OF_MONTH, day);
-            updateLabel(editStartDate, myCalendarStart);
-        };
-        endDate = (datePicker, year, month, day) -> {
-            myCalendarEnd.set(Calendar.YEAR,year);
-            myCalendarEnd.set(Calendar.MONTH, month);
-            myCalendarEnd.set(Calendar.DAY_OF_MONTH, day);
-            updateLabel(editEndDate, myCalendarEnd);
-        };
-        status = getIntent().getStringExtra("status");
-        instructorName = getIntent().getStringExtra("instructor name");
-        instructorPhone = getIntent().getStringExtra("phone");
-        instructorEmail = getIntent().getStringExtra("email");
-
-
-        editTitle.setText(title);
-        editStatus.setText(status);
-        editInstructorName.setText(instructorName);
-        editInstructorPhone.setText(instructorPhone);
-        editInstructorEmail.setText(instructorEmail);
-
-    }
-
-    private void updateLabel(EditText text, Calendar calendar){
-        String myFormat = "MM/dd/yyyy";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
-
-        text.setText(dateFormat.format(calendar.getTime()));
-
-    }
-
-    public void onSave(View view){
-        Course course;
-        if(courseID == -1){
-            int newID = 0;
-            course = new Course(newID, editTitle.getText().toString(), editStartDate.getText().toString(),
-                    editEndDate.getText().toString(), editStatus.getText().toString(), editInstructorName.getText().toString(),
-                    editInstructorPhone.getText().toString(), editInstructorEmail.getText().toString());
-            repository.insertCourse(course);
-        }
-        else{
-            course = new Course(courseID, editTitle.getText().toString(), editStartDate.getText().toString(),
-                    editEndDate.getText().toString(), editStatus.getText().toString(), editInstructorName.getText().toString(),
-                    editInstructorPhone.getText().toString(), editInstructorEmail.getText().toString());
-            repository.updateCourse(course);
         }
 
+        AssessmentAdapter adapter = new AssessmentAdapter(getApplicationContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter.setAssessments(associatedAssessments);
+
+        addAssessment = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        addAssessment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!isShowing) {
+                    addAssessment.hide();
+                    newCourseDialog();
+                    isShowing = true;
+                } else {
+                    isShowing = false;
+                }
+            }
+        });
+
+        final Assessment[] deletedAssessment = {null};
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                if (direction == ItemTouchHelper.LEFT) {
+                    Assessment assessmentSelected;
+                    assessmentSelected = adapter.getAssessmentPosition(viewHolder.getAdapterPosition());
+                    deletedAssessment[0] = assessmentSelected;
+                    assessments.remove(assessmentSelected);
+                    associatedAssessments.remove(assessmentSelected);
+                    repo.deleteAssessment(assessmentSelected);
+                    Snackbar.make(recyclerView, "Assessment Deleted", Snackbar.LENGTH_LONG)
+                            .setAction("Undo", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    assessments.add(deletedAssessment[0]);
+                                    associatedAssessments.add(deletedAssessment[0]);
+                                    repo.insertAssessment(deletedAssessment[0]);
+                                    recreate();
+                                }
+                            }).show();
+                    //case ItemTouchHelper.RIGHT:
+                    //Modify
+                }
+            }
+
+        }).attachToRecyclerView(recyclerView);
     }
+
+    public void newCourseDialog(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        View newAssessmentPopup = getLayoutInflater().inflate(R.layout.popup_new_assessment, null);
+        editTitle = (EditText) newAssessmentPopup.findViewById(R.id.assessmentTitleText);
+        editStartDate = (EditText) newAssessmentPopup.findViewById(R.id.assessmentStart);
+        editEndDate = (EditText) newAssessmentPopup.findViewById(R.id.assessmentEnd);
+        assessmentGroup = (RadioGroup) newAssessmentPopup.findViewById(R.id.assessmentRadio);
+        paButton = (RadioButton) newAssessmentPopup.findViewById(R.id.paButton);
+        oaButton = (RadioButton) newAssessmentPopup.findViewById(R.id.oaButton);
+
+        final Calendar myCalendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
+                updateLabel(tempText);
+            }
+
+            private void updateLabel(EditText et){
+                String dateFormat = "MM-dd-yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.US);
+                et.setText(simpleDateFormat.format(myCalendar.getTime()));
+            }
+        };
+        editStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempText = editStartDate;
+                new DatePickerDialog(CourseDetail.this, date,
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                editStartDate = tempText;
+            }
+        });
+        editEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempText = editEndDate;
+                new DatePickerDialog(CourseDetail.this, date,
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                editEndDate = tempText;
+            }
+        });
+
+        assessmentGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRadioButtonClicked(view);
+            }
+        });
+
+
+        saveButton = (Button) newAssessmentPopup.findViewById(R.id.saveButton);
+        cancelButton = (Button) newAssessmentPopup.findViewById(R.id.cancelButton);
+
+        dialogBuilder.setView(newAssessmentPopup);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Save Assessment
+                assessmentID = 0;
+                assessmentTitle = editTitle.getText().toString();
+                startDate = editStartDate.getText().toString();
+                endDate = editEndDate.getText().toString();
+                int courseID = currentCourse.getCourseID();
+
+                Assessment assessment;
+                assessment = new Assessment(assessmentID, assessmentTitle, startDate, endDate, assessmentType, courseID);
+                repo.insertAssessment(assessment);
+                System.out.println(currentCourse.getCourseTitle() + "added: " + assessment.getAssessmentTitle());
+                recreate();
+                alertDialog.dismiss();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    public void onRadioButtonClicked(View view){
+        switch (view.getId()){
+            case R.id.paButton:
+                assessmentType = paButton.getText().toString();
+                break;
+            case R.id.oaButton:
+                assessmentType = oaButton.getText().toString();
+                break;
+        }
+
+    }
+
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_share_notify, menu);

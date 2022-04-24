@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.model.Course;
+import com.c196.abm2_mobileapplication.model.Term;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
 
         private CourseViewHolder(View view) {
             super(view);
-            courseItemView = view.findViewById(R.id.courseItemText);
+            courseItemView = view.findViewById(R.id.displayItemText);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -56,7 +57,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
     @NonNull
     @Override
     public CourseAdapter.CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflator.inflate(R.layout.list_item_course, parent, false);
+        View view = mInflator.inflate(R.layout.list_item_display, parent, false);
         return new CourseAdapter.CourseViewHolder(view);
     }
 
@@ -75,6 +76,10 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
     public void setCourses(List<Course> courses){
         mCourses = courses;
         notifyDataSetChanged();
+    }
+
+    public Course getCoursePosition(int position){
+        return mCourses.get(position);
     }
 
     @Override

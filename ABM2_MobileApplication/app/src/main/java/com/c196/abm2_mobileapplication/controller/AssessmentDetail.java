@@ -64,7 +64,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         editTypeSpinner.setAdapter(dataAdapter);
     }
 
-    public void onSave(View view){
+    /*public void onSave(View view){
         Assessment assessment;
         if(assessmentID == -1){
             int newID = 0;
@@ -77,7 +77,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         }
         closeContextMenu();
 
-    }
+    }*/
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
