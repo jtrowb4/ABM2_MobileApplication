@@ -7,16 +7,21 @@
     tools:context=".controller.HomeScreenActivity"
     tools:ignore="MissingDefaultResource"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="67dp">
+    tools:layout_editor_absoluteY="0dp">
 
     <TableLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
+
         <TableRow
-            android:onClick="toTermScreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="toTermScreen">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -74,10 +79,11 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 tools:layout_editor_absoluteY="216dp" />
         </TableRow>
+
         <TableRow
-            android:onClick="toAssessmentScreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="toAssessmentScreen">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -103,36 +109,6 @@
                 android:typeface="normal"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 tools:layout_editor_absoluteY="331dp" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="144dp"
-                android:layout_height="144dp"
-                android:layout_margin="15dp"
-                android:onClick="toTermScreen"
-                app:srcCompat="@drawable/ic_twotone_help_center_24"
-                tools:layout_editor_absoluteX="15dp"
-                tools:layout_editor_absoluteY="447dp" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="sans-serif-light"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:text="Help"
-                android:textAlignment="viewStart"
-                android:textSize="34sp"
-                android:typeface="normal"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                tools:layout_editor_absoluteY="399dp"
-                android:layout_marginTop="25dp" />
         </TableRow>
     </TableLayout>
 

@@ -8,14 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
@@ -28,7 +26,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class TermScreenActivity extends AppCompatActivity {
+public class TermListActivity extends AppCompatActivity {
 
     //FAB items
     boolean isShowing = false;
@@ -62,6 +60,7 @@ public class TermScreenActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter.setTerms(terms);
+
 
         addTerm = (FloatingActionButton)findViewById(R.id.floatingActionButton);
         addTerm.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +104,6 @@ public class TermScreenActivity extends AppCompatActivity {
                                     recreate();
                                 }
                             }).show();
-                    //case ItemTouchHelper.RIGHT:
-                    //Modify
                 }
             }
 
@@ -140,7 +137,7 @@ public class TermScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tempText = editStartDate;
-                new DatePickerDialog(TermScreenActivity.this, date,
+                new DatePickerDialog(TermListActivity.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 editStartDate = tempText;
             }
@@ -149,7 +146,7 @@ public class TermScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tempText = editEndDate;
-                new DatePickerDialog(TermScreenActivity.this, date,
+                new DatePickerDialog(TermListActivity.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 editEndDate = tempText;
             }
@@ -186,24 +183,5 @@ public class TermScreenActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate((R.menu.appbar_menu_detail), menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-   }
-
-   //Use for Modify Menu Item
-    public void toEditor(View view) {
-        Intent editorScreenIntent = new Intent(TermScreenActivity.this, TermDetail.class);
-        startActivity(editorScreenIntent);
-    }
 
 }

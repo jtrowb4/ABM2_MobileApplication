@@ -5,9 +5,11 @@ import android.text.style.ReplacementSpan;
 
 import com.c196.abm2_mobileapplication.dao.AssessmentDAO;
 import com.c196.abm2_mobileapplication.dao.CourseDAO;
+import com.c196.abm2_mobileapplication.dao.NotesDAO;
 import com.c196.abm2_mobileapplication.dao.TermDAO;
 import com.c196.abm2_mobileapplication.model.Assessment;
 import com.c196.abm2_mobileapplication.model.Course;
+import com.c196.abm2_mobileapplication.model.CourseNotes;
 import com.c196.abm2_mobileapplication.model.Term;
 
 import java.util.List;
@@ -17,9 +19,11 @@ import java.util.concurrent.Executors;
 public class Repository {
     private TermDAO mTermDAO;
     private CourseDAO mCourseDAO;
+    private NotesDAO mNotesDAO;
     private AssessmentDAO mAssessmentDAO;
     private List<Term> mAllTerms;
     private List<Course> mAllCourses;
+    private List<CourseNotes> mAllNotes;
     private List<Assessment> mAllAssessments;
 
     private static int NUMBER_OF_THREADS = 4;
@@ -29,6 +33,7 @@ public class Repository {
         DatabaseBuilder databaseBuilder = DatabaseBuilder.getInstance(application);
         mTermDAO = databaseBuilder.termDAO();
         mCourseDAO = databaseBuilder.courseDAO();
+        mNotesDAO = databaseBuilder.notesDAO();
         mAssessmentDAO = databaseBuilder.assessmentDAO();
     }
 
@@ -126,6 +131,53 @@ public class Repository {
         return mAllCourses;
     }
 
+//CourseNotes
+public void insertNote(CourseNotes notes){
+    databaseExecutor.execute(()->{
+        mNotesDAO.insertNote(notes);
+    });
+    try{
+        Thread.sleep(1000);
+    }
+    catch (InterruptedException e){
+        e.printStackTrace();
+    }
+}
+public void updateNote(CourseNotes courseNotes){
+    databaseExecutor.execute(()->{
+        mNotesDAO.updateNote(courseNotes);
+    });
+    try{
+        Thread.sleep(1000);
+    }
+    catch (InterruptedException e){
+        e.printStackTrace();
+    }
+}
+public void deleteNote(CourseNotes courseNotes){
+    databaseExecutor.execute(()->{
+        mNotesDAO.deleteNote(courseNotes);
+    });
+    try{
+        Thread.sleep(1000);
+    }
+    catch (InterruptedException e){
+        e.printStackTrace();
+    }
+}
+public List<CourseNotes> getAllNotes(){
+    databaseExecutor.execute(()->{
+        mAllNotes = mNotesDAO.getAllNotes();
+    });
+    try{
+        Thread.sleep(1000);
+    }
+    catch (InterruptedException e){
+        e.printStackTrace();
+    }
+    return mAllNotes;
+}
+
 //Assessments
     public void insertAssessment(Assessment assessment){
         databaseExecutor.execute(()->{
@@ -160,6 +212,7 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
     public List<Assessment> getAllAssessments(){
         databaseExecutor.execute(()->{
             mAllAssessments = mAssessmentDAO.getAllAssessments();

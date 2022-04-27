@@ -18,17 +18,17 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     public void toTermScreen(View view) {
-        Intent termScreenIntent = new Intent(HomeScreenActivity.this, TermScreenActivity.class);
+        Intent termScreenIntent = new Intent(HomeScreenActivity.this, TermListActivity.class);
         startActivity(termScreenIntent);
     }
 
     public void toCourseScreen(View view) {
-        Intent courseScreenIntent = new Intent(HomeScreenActivity.this, CourseScreenActivity.class);
-        startActivity(courseScreenIntent);
+        Intent termScreenIntent = new Intent(HomeScreenActivity.this, CourseListActivity.class);
+        startActivity(termScreenIntent);
     }
 
     public void toAssessmentScreen(View view) {
-        Intent assessmentScreenIntent = new Intent(HomeScreenActivity.this, AssessmentScreenActivity.class);
-        startActivity(assessmentScreenIntent);
+        Intent termScreenIntent = new Intent(HomeScreenActivity.this, AssessmentListActivity.class);
+        startActivity(termScreenIntent);
     }
 }

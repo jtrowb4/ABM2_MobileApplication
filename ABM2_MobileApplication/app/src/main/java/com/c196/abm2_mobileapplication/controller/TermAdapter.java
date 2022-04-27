@@ -49,8 +49,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         this.context = context;
     }
 
-
-
     @NonNull
     @Override
     public TermAdapter.TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

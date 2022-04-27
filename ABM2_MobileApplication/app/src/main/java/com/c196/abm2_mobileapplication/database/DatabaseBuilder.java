@@ -8,19 +8,22 @@ import androidx.room.RoomDatabase;
 
 import com.c196.abm2_mobileapplication.dao.AssessmentDAO;
 import com.c196.abm2_mobileapplication.dao.CourseDAO;
+import com.c196.abm2_mobileapplication.dao.NotesDAO;
 import com.c196.abm2_mobileapplication.dao.TermDAO;
 
 import com.c196.abm2_mobileapplication.model.Assessment;
 import com.c196.abm2_mobileapplication.model.Course;
+import com.c196.abm2_mobileapplication.model.CourseNotes;
 import com.c196.abm2_mobileapplication.model.Term;
 
 //if you change any of the class you must increment the version number
-@Database(entities={Term.class, Course.class, Assessment.class}, version = 2, exportSchema = false)
+@Database(entities={Term.class, Course.class, Assessment.class, CourseNotes.class}, version = 2, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
     public abstract AssessmentDAO assessmentDAO();
+    public abstract NotesDAO notesDAO();
 
     private static volatile DatabaseBuilder INSTANCE;
 

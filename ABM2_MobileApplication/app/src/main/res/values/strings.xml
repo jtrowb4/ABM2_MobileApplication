@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ABM2_MobileApplication</string>
     <string-array name="status_array">
-        <item>Status...</item>
+        <item>Status…</item>
         <item>In Progress</item>
         <item>Completed</item>
         <item>Dropped</item>

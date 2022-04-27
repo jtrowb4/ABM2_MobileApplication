@@ -14,28 +14,23 @@
         android:title="Delete"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/share"
-        android:orderInCategory="0"
-        android:title="Share"
-        app:showAsAction="never" />
+    <group android:id="@+id/overFlowItems">
+        <item
+            android:id="@+id/share"
+            android:orderInCategory="0"
+            android:title="Share"
+            app:showAsAction="never" />
 
-    <item
-        android:id="@+id/notify"
-        android:title="Notify"
-        android:orderInCategory="1"
-        app:showAsAction="never"/>
+        <item
+            android:id="@+id/noted"
+            android:title="Add Note"
+            android:orderInCategory="2"
+            app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_logout"
-        android:title="Logout"
-        android:orderInCategory="2"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_about"
-        android:title="Help"
-        android:orderInCategory="3"
-        app:showAsAction="never"/>
-
+        <item
+            android:id="@+id/viewNote"
+            android:title="View All Notes"
+            android:orderInCategory="3"
+            app:showAsAction="never"/>
+    </group>
 </menu>

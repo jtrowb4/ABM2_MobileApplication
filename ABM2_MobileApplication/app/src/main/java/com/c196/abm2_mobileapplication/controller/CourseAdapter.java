@@ -31,7 +31,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
                     int position = getAdapterPosition();
                     final Course currentCourse = mCourses.get(position);
                     Intent intent = new Intent(context, CourseDetail.class);
-                    intent.putExtra("id", currentCourse.getCourseID());
+                    intent.putExtra("course id", currentCourse.getCourseID());
                     intent.putExtra("title", currentCourse.getCourseTitle());
                     intent.putExtra("start date", currentCourse.getStartDate());
                     intent.putExtra("end date", currentCourse.getEndDate());
@@ -39,6 +39,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
                     intent.putExtra("instructor name", currentCourse.getInstructorName());
                     intent.putExtra("phone", currentCourse.getInstructorPhone());
                     intent.putExtra("email", currentCourse.getInstructorEmail());
+                    intent.putExtra("term id", currentCourse.getTermID());
 
                     context.startActivity(intent);
                 }
@@ -58,7 +59,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
     @Override
     public CourseAdapter.CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflator.inflate(R.layout.list_item_display, parent, false);
-        return new CourseAdapter.CourseViewHolder(view);
+        return new CourseViewHolder(view);
     }
 
     @Override

@@ -24,7 +24,7 @@
             android:exported="false"
             android:label="Home" />
         <activity
-            android:name=".controller.TermScreenActivity"
+            android:name=".controller.TermListActivity"
             android:exported="false"
             android:label="Terms"
             android:parentActivityName=".controller.HomeScreenActivity" />
@@ -32,27 +32,39 @@
             android:name=".controller.TermDetail"
             android:exported="false"
             android:label="Terms Editor"
-            android:parentActivityName=".controller.TermScreenActivity" />
-        <activity
-            android:name=".controller.CourseScreenActivity"
-            android:exported="false"
-            android:label="Courses"
-            android:parentActivityName=".controller.HomeScreenActivity" />
+            android:parentActivityName=".controller.TermListActivity" />
         <activity
             android:name=".controller.CourseDetail"
             android:exported="false"
             android:label="Course Editor"
-            android:parentActivityName=".controller.CourseScreenActivity" />
-        <activity
-            android:name=".controller.AssessmentScreenActivity"
-            android:exported="false"
-            android:label="Assessments"
-            android:parentActivityName=".controller.HomeScreenActivity" />
+            android:launchMode="singleTop"
+            android:parentActivityName=".controller.TermDetail" />
         <activity
             android:name=".controller.AssessmentDetail"
             android:exported="false"
             android:label="Assessment Editor"
-            android:parentActivityName=".controller.AssessmentScreenActivity" />
+            android:parentActivityName=".controller.CourseDetail" />
+        <activity
+            android:name=".controller.CourseListActivity"
+            android:exported="false"
+            android:label="Courses"
+            android:parentActivityName=".controller.HomeScreenActivity" />
+        <activity
+            android:name=".controller.AssessmentListActivity"
+            android:exported="false"
+            android:label="Assessments"
+            android:parentActivityName=".controller.HomeScreenActivity" />
+        <activity
+            android:name=".controller.NotesListActivity"
+            android:exported="false"
+            android:label="Course Notes"
+            android:parentActivityName=".controller.CourseDetail" />
+        <activity
+            android:name=".controller.NoteDetail"
+            android:exported="false"
+            android:label="Note Detail"
+            android:parentActivityName=".controller.NotesListActivity" />
+
     </application>
 
 </manifest>

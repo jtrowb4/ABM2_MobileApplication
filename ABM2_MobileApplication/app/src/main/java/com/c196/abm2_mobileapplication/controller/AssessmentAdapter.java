@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.model.Assessment;
-import com.c196.abm2_mobileapplication.model.Course;
 
 import java.util.List;
 
@@ -35,6 +34,7 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
                     intent.putExtra("type", currentAssessment.getAssessmentType());
                     intent.putExtra("start date", currentAssessment.getStartDate());
                     intent.putExtra("end date", currentAssessment.getEndDate());
+                    intent.putExtra("course id", currentAssessment.getCourseID());
                     context.startActivity(intent);
                 }
             });
@@ -73,8 +73,8 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
         notifyDataSetChanged();
     }
 
-    public Assessment getAssessmentPosition (int postion){
-        return mAssessments.get(postion);
+    public Assessment getAssessmentPosition (int position){
+        return mAssessments.get(position);
     }
 
     @Override

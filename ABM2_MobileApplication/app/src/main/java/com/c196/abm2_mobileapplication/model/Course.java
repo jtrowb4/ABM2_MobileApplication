@@ -1,7 +1,6 @@
 package com.c196.abm2_mobileapplication.model;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses")
@@ -101,5 +100,6 @@ public class Course {
     public void setTermID(int termID) {
         this.termID = termID;
     }
+
 }
 

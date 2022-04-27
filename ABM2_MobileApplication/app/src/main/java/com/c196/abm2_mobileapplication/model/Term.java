@@ -2,10 +2,8 @@ package com.c196.abm2_mobileapplication.model;
 
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
 
 @Entity(tableName = "terms")
 public class Term {
@@ -14,10 +12,6 @@ public class Term {
     private String termTitle;
     private String startDate;
     private String endDate;
-
-    @Ignore
-    protected final ArrayList<Course> associatedCourses = new ArrayList<>();
-
 
     public Term(int termID, String termTitle, String startDate, String endDate) {
         this.termID = termID;
