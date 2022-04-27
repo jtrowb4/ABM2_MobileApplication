@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ABM2_MobileApplication">
+
         <activity
             android:name=".main.MainActivity"
             android:exported="true"
@@ -64,6 +65,10 @@
             android:exported="false"
             android:label="Note Detail"
             android:parentActivityName=".controller.NotesListActivity" />
+        <receiver
+            android:name=".controller.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
 
     </application>
 

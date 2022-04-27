@@ -8,23 +8,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.media.MediaRouter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
+import com.c196.abm2_mobileapplication.model.Course;
 import com.c196.abm2_mobileapplication.model.Term;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class TermListActivity extends AppCompatActivity {
 
@@ -92,25 +95,52 @@ public class TermListActivity extends AppCompatActivity {
                 if (direction == ItemTouchHelper.LEFT) {
                     Term termSelected;
                     termSelected = adapter.getTermPosition(viewHolder.getAdapterPosition());
-                    deletedTerm[0] = termSelected;
-                    terms.remove(termSelected);
-                    repo.deleteTerm(termSelected);
-                    Snackbar.make(recyclerView, "Term Deleted", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    terms.add(deletedTerm[0]);
-                                    repo.insertTerm(deletedTerm[0]);
+
+                    List<Course> courses = repo.getAllCourse();
+                    ArrayList<Course> termCourses = new ArrayList<>();
+                    for (Course course : courses) {
+                        if (course.getTermID() == termSelected.getTermID()) {
+                            termCourses.add(course);
+                        }
+                    }
+
+                    if (termCourses.size() > 0) {
+                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                        Snackbar snackbar = Snackbar.make(recyclerView, "Term has associated Courses. Cannot Delete.", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        snackbar.addCallback(new Snackbar.Callback() {
+
+                            @Override
+                            public void onDismissed(Snackbar snackbar, int event) {
+                                if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
                                     recreate();
                                 }
-                            }).show();
+                            }
+                        });
+
+
+                    } else {
+                        deletedTerm[0] = termSelected;
+                        terms.remove(termSelected);
+                        repo.deleteTerm(termSelected);
+                        Snackbar.make(recyclerView, "Term Deleted", Snackbar.LENGTH_LONG)
+                                .setAction("Undo", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        terms.add(deletedTerm[0]);
+                                        repo.insertTerm(deletedTerm[0]);
+                                        recreate();
+                                    }
+                                }).show();
+                    }
                 }
             }
-
         }).attachToRecyclerView(recyclerView);
+
     }
 
     public void newTermDialog(){
+
         dialogBuilder = new AlertDialog.Builder(this);
         View newTermPopup = getLayoutInflater().inflate(R.layout.popup_new_term, null);
         editTitle = (EditText) newTermPopup.findViewById(R.id.termTitleText);
@@ -162,16 +192,28 @@ public class TermListActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save Assessment
-                termID = 0;
-                termTitle = editTitle.getText().toString();
-                startDate = editStartDate.getText().toString();
-                endDate = editEndDate.getText().toString();
-                Term term;
-                term = new Term(termID, termTitle, startDate, endDate);
-                repo.insertTerm(term);
-                recreate();
-                alertDialog.dismiss();
+                try{
+                    //check for empty values
+                    if((editTitle.getText().toString().equals("")) || (editStartDate.getText().toString()).equals("") || (editEndDate.getText().toString().equals(""))){
+                        throw new Exception("All Fields and Selections are Required");
+                    }
+
+                    //Save Assessment
+                    termID = 0;
+                    termTitle = editTitle.getText().toString();
+                    startDate = editStartDate.getText().toString();
+                    endDate = editEndDate.getText().toString();
+                    Term term;
+                    term = new Term(termID, termTitle, startDate, endDate);
+                    repo.insertTerm(term);
+                    recreate();
+                    alertDialog.dismiss();
+                }
+
+                catch (Exception e){
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -179,9 +221,10 @@ public class TermListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                recreate();
             }
         });
-    }
 
+    }
 
 }

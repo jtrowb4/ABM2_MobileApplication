@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ABM2_MobileApplication</string>
+    <string name="channel_name">notifyChannel</string>
+    <string name="channel_description">notifyChannelDesc</string>
     <string-array name="status_array">
         <item>Status…</item>
         <item>In Progress</item>

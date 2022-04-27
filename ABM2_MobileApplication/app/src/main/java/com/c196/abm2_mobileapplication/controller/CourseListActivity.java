@@ -1,7 +1,6 @@
 package com.c196.abm2_mobileapplication.controller;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,9 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
@@ -24,35 +20,7 @@ import java.util.List;
 public class CourseListActivity extends AppCompatActivity {
     //Contains list of Course
 
-    //FAB items
-    boolean isShowing = false;
-    FloatingActionButton addCourse;
-    //DialogBox items
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog alertDialog;
-
-    EditText editTitle;
-    EditText editStartDate;
-    EditText editEndDate;
-    Spinner editStatus;
-    EditText editName;
-    EditText editPhone;
-    EditText editEmail;
-
-    EditText tempText;
-    Button saveButton;
-    Button cancelButton;
-
-    //for saving course to repo
     Repository repo;
-    int courseID;
-    String courseTitle;
-    String startDate;
-    String endDate;
-    String status;
-    String instructorName;
-    String instructorPhone;
-    String instructorEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

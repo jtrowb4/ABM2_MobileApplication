@@ -17,7 +17,7 @@ import com.c196.abm2_mobileapplication.model.CourseNotes;
 import com.c196.abm2_mobileapplication.model.Term;
 
 //if you change any of the class you must increment the version number
-@Database(entities={Term.class, Course.class, Assessment.class, CourseNotes.class}, version = 2, exportSchema = false)
+@Database(entities={Term.class, Course.class, Assessment.class, CourseNotes.class}, version = 3, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();

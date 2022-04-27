@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.model.Course;
-import com.c196.abm2_mobileapplication.model.Term;
 
 import java.util.List;
 

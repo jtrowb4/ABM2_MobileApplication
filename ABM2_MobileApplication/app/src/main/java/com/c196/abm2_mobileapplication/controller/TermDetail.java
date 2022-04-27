@@ -52,8 +52,6 @@ public class TermDetail extends AppCompatActivity {
     EditText tempText;
     Button saveButton;
     Button cancelButton;
-    Button editTerm;
-    Button deleteTerm;
 
     //for saving course to repo
     Repository repo;
@@ -110,6 +108,7 @@ public class TermDetail extends AppCompatActivity {
                     newCourseDialog();
                     isShowing = true;
                 } else {
+                    addCourse.setVisibility(View.VISIBLE);
                     isShowing = false;
                 }
             }
@@ -232,6 +231,7 @@ public class TermDetail extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recreate();
                 alertDialog.dismiss();
             }
         });
@@ -323,10 +323,12 @@ public class TermDetail extends AppCompatActivity {
                 Snackbar.make(recyclerView, "Term has associated Courses. Cannot Delete.", Snackbar.LENGTH_LONG).show();
                 break;
             }
+            else{
+                repo.deleteTerm(currentTerm);
+                this.finish();
+                recreate();
+            }
         }
-        this.finish();
-        repo.deleteTerm(currentTerm);
-        recreate();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

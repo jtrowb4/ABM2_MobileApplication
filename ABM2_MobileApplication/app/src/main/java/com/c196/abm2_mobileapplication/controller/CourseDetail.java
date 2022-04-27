@@ -3,12 +3,14 @@ package com.c196.abm2_mobileapplication.controller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,25 +19,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
+import com.c196.abm2_mobileapplication.main.MainActivity;
 import com.c196.abm2_mobileapplication.model.Assessment;
 import com.c196.abm2_mobileapplication.model.Course;
 import com.c196.abm2_mobileapplication.model.CourseNotes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -70,6 +73,8 @@ public class CourseDetail extends AppCompatActivity {
     String endDate;
 
     public static Course currentCourse;
+    private EditText editCourseStart;
+    private EditText editCourseEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,14 +272,15 @@ public class CourseDetail extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-            case R.id.share:
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Text from field");
-                sendIntent.putExtra(Intent.EXTRA_TITLE, "Title");
-                sendIntent.setType("text/plain");
-                Intent shareIntent = Intent.createChooser(sendIntent, null);
-                startActivity(shareIntent);
+            case R.id.notify:
+                String dateFromScreenStart = currentCourse.getStartDate();
+                String alertStart = "Your Course: " + currentCourse.getCourseTitle() + " Starts Today";
+                setNotification(CourseDetail.this,dateFromScreenStart, alertStart);
+                Toast.makeText(CourseDetail.this, "Notification Alert set for Course Start", Toast.LENGTH_LONG);
+                String dateFromScreenEnd = currentCourse.getEndDate();
+                String alertEnd = "Your Course: " + currentCourse.getCourseTitle() + " Ends Today";
+                setNotification(CourseDetail.this, dateFromScreenEnd, alertEnd);
+                Toast.makeText(CourseDetail.this, "Notification Alert set for Course Start", Toast.LENGTH_LONG);
                 return true;
             case R.id.action_edit:
                 editCourse();
@@ -306,13 +312,11 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     public void editCourse(){
-
-
         dialogBuilder = new AlertDialog.Builder(this);
         View editCoursePopup = getLayoutInflater().inflate(R.layout.popup_new_course, null);
         EditText editCourseTitle = (EditText) editCoursePopup.findViewById(R.id.courseTitleText);
-        EditText editCourseStart = (EditText) editCoursePopup.findViewById(R.id.courseStartText);
-        EditText editCourseEnd = (EditText) editCoursePopup.findViewById(R.id.courseEndText);
+        editCourseStart = (EditText) editCoursePopup.findViewById(R.id.courseStartText);
+        editCourseEnd = (EditText) editCoursePopup.findViewById(R.id.courseEndText);
         Spinner editStatus = (Spinner) editCoursePopup.findViewById(R.id.statusSpinner);
         EditText editName = (EditText) editCoursePopup.findViewById(R.id.instructorName);
         EditText editPhone = (EditText) editCoursePopup.findViewById(R.id.instructorPhone);
@@ -336,7 +340,6 @@ public class CourseDetail extends AppCompatActivity {
         editEmail.setText(getIntent().getStringExtra("email"));
 
 
-
         final Calendar myCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -356,19 +359,19 @@ public class CourseDetail extends AppCompatActivity {
         editCourseStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tempText = editStartDate;
+                tempText = editCourseStart;
                 new DatePickerDialog(CourseDetail.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                editStartDate = tempText;
+                editCourseStart = tempText;
             }
         });
         editCourseEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tempText = editEndDate;
+                tempText = editCourseEnd;
                 new DatePickerDialog(CourseDetail.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                editEndDate = tempText;
+                editCourseEnd = tempText;
             }
         });
 
@@ -385,8 +388,8 @@ public class CourseDetail extends AppCompatActivity {
                 //Save Course
                 int courseID = getIntent().getIntExtra("course id", -1);
                 String courseTitle = editCourseTitle.getText().toString();
-                startDate = editStartDate.getText().toString();
-                endDate = editEndDate.getText().toString();
+                startDate = editCourseStart.getText().toString();
+                endDate = editCourseEnd.getText().toString();
                 String status = editStatus.getSelectedItem().toString();
                 String instructorName = editName.getText().toString();
                 String instructorPhone = editPhone.getText().toString();
@@ -464,5 +467,27 @@ public class CourseDetail extends AppCompatActivity {
         email.setText("Email: " + currentCourse.getInstructorEmail());
         phone.setText("Phone: " + currentCourse.getInstructorPhone());
 
+    }
+
+    public void setNotification(Context context, String date, String notification) {
+
+        String dateFromScreen = date;
+
+        Date notifyDate=null;
+
+        String dateFormat = "MM-dd-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.US);
+
+        try{
+            notifyDate = simpleDateFormat.parse(dateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Long trigger = notifyDate.getTime();
+        Intent intent=new Intent(context, NotificationReceiver.class);
+        intent.putExtra("key",notification);
+        PendingIntent sender = PendingIntent.getBroadcast(context, MainActivity.numAlert++, intent ,0);
+        AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
     }
 }

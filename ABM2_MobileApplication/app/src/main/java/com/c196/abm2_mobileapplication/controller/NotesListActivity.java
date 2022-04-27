@@ -31,37 +31,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class NotesListActivity extends AppCompatActivity {
-    //Contains list of Course
-
-    //FAB items
-    boolean isShowing = false;
-    FloatingActionButton addCourse;
-    //DialogBox items
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog alertDialog;
-
-    EditText editTitle;
-    EditText editStartDate;
-    EditText editEndDate;
-    Spinner editStatus;
-    EditText editName;
-    EditText editPhone;
-    EditText editEmail;
-
-    EditText tempText;
-    Button saveButton;
-    Button cancelButton;
+    //Contains list of Notes
 
     //for saving course to repo
     Repository repo;
-    int courseID;
-    String courseTitle;
-    String startDate;
-    String endDate;
-    String status;
-    String instructorName;
-    String instructorPhone;
-    String instructorEmail;
     private Course currentCourse;
 
     @Override

@@ -20,7 +20,11 @@
             android:orderInCategory="0"
             android:title="Share"
             app:showAsAction="never" />
-
+        <item
+            android:id="@+id/notify"
+            android:orderInCategory="0"
+            android:title="Notify"
+            app:showAsAction="never" />
         <item
             android:id="@+id/noted"
             android:title="Add Note"

@@ -1,34 +1,22 @@
 package com.c196.abm2_mobileapplication.controller;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
-import com.c196.abm2_mobileapplication.model.Assessment;
-import com.c196.abm2_mobileapplication.model.Course;
 import com.c196.abm2_mobileapplication.model.CourseNotes;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
+
 
 public class NoteDetail extends AppCompatActivity{
 
@@ -45,7 +33,6 @@ public class NoteDetail extends AppCompatActivity{
 
         textTitle = findViewById(R.id.noteTitle);
         textBody = findViewById(R.id.noteBody);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         repository = new Repository(getApplication());
         List<CourseNotes> notes = repository.getAllNotes();
         for (CourseNotes note : notes) {

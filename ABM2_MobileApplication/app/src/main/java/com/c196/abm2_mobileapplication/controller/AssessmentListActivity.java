@@ -22,37 +22,11 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 public class AssessmentListActivity extends AppCompatActivity {
-    //Contains list of Course
+    //Contains list of Assessments
 
-    //FAB items
-    boolean isShowing = false;
-    FloatingActionButton addCourse;
-    //DialogBox items
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog alertDialog;
-
-    EditText editTitle;
-    EditText editStartDate;
-    EditText editEndDate;
-    Spinner editStatus;
-    EditText editName;
-    EditText editPhone;
-    EditText editEmail;
-
-    EditText tempText;
-    Button saveButton;
-    Button cancelButton;
 
     //for saving course to repo
     Repository repo;
-    int courseID;
-    String courseTitle;
-    String startDate;
-    String endDate;
-    String status;
-    String instructorName;
-    String instructorPhone;
-    String instructorEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
