@@ -20,11 +20,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
 import com.c196.abm2_mobileapplication.main.MainActivity;
 import com.c196.abm2_mobileapplication.model.Assessment;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import java.text.ParseException;
@@ -33,6 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class AssessmentDetail extends AppCompatActivity{
@@ -116,9 +119,9 @@ public class AssessmentDetail extends AppCompatActivity{
     }
 
     public void deleteAssessment() {
-        this.finish();
+
         repository.deleteAssessment(currentAssessment);
-        recreate();
+        this.finish();
     }
 
     public void editAssessment(){
@@ -205,6 +208,14 @@ public class AssessmentDetail extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 //Save Assessment
+                try {
+                    //check for empty values
+                    if ((editTitle.getText().toString().equals("")) || (editStartDate.getText().toString()).equals("") ||
+                            (editEndDate.getText().toString().equals("")))
+                    {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
+
                 assessmentID = currentAssessment.getAssessmentID();
                 String assessmentTitle = editTitle.getText().toString();
                 startDate = editStartDate.getText().toString();
@@ -216,6 +227,12 @@ public class AssessmentDetail extends AppCompatActivity{
                 repository.updateAssessment(assessment);
                 recreate();
                 alertDialog.dismiss();
+            }
+
+                catch (Exception e){
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -272,6 +289,12 @@ public class AssessmentDetail extends AppCompatActivity{
         PendingIntent sender = PendingIntent.getBroadcast(context, MainActivity.numAlert++, intent ,0);
         AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
 }

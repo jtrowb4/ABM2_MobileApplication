@@ -74,5 +74,11 @@ public class AssessmentListActivity extends AppCompatActivity {
         }).attachToRecyclerView(recyclerView);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
+
 }
 

@@ -14,7 +14,19 @@
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_library_books_24.xml" value="0.111" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_list_alt_24.xml" value="0.111" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/drawable/ic_twotone_school_24.xml" value="0.111" />
-        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_assessment_detail.xml" value="0.33" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_assessment_detail.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_course_detail.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_home_screen.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_list_screen.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_note_detail.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/activity_term_detail.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/list_item_display.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/popup_new_assessment.xml" value="0.33" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/popup_new_course.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/popup_new_note.xml" value="0.25" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout-land/popup_new_term.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_assessment_detail.xml" value="0.18" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_assessment_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_detail.xml" value="0.33" />
         <entry key="..\:/Users/jamet/AndroidStudioProjects/C196/ABM2_MobileApplication/app/src/main/res/layout/activity_course_screen.xml" value="0.20052083333333334" />

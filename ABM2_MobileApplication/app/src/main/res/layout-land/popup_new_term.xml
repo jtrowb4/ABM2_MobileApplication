@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageTerm"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_twotone_school_24" />
+
+
+    <EditText
+        android:id="@+id/termTitleText"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:hint="Term Title"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageTerm"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/termStartText"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:focusable="false"
+        android:hint="Term Start Date"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageTerm"
+        app:layout_constraintTop_toBottomOf="@+id/termTitleText" />
+
+    <EditText
+        android:id="@+id/termEndText"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="16dp"
+        android:focusable="false"
+        android:hint="Term End Date"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageTerm"
+        app:layout_constraintTop_toBottomOf="@+id/termStartText" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/secondary"
+        android:minWidth="100dp"
+        android:minHeight="48dp"
+        android:text="Save"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cancelButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/termEndText"
+        app:layout_constraintTop_toBottomOf="@+id/termEndText" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/secondary"
+        android:minWidth="100dp"
+        android:minHeight="50dp"
+        android:text="Cancel"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/termEndText"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toBottomOf="@+id/termEndText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

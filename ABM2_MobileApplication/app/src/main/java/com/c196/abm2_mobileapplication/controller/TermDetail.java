@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class TermDetail extends AppCompatActivity {
     //Contains information on Term Selected
@@ -208,23 +210,34 @@ public class TermDetail extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save Assessment
-                courseID = 0;
-                courseTitle = editTitle.getText().toString();
-                startDate = editStartDate.getText().toString();
-                endDate = editEndDate.getText().toString();
-                status = editStatus.getSelectedItem().toString();
-                instructorName = editName.getText().toString();
-                instructorPhone = editPhone.getText().toString();
-                instructorEmail = editEmail.getText().toString();
-                int termID = currentTerm.getTermID();
+                try {
+                    //check for empty values
+                    if ((editTitle.getText().toString().equals("")) || (editStartDate.getText().toString()).equals("") ||
+                            (editEndDate.getText().toString().equals("")) || editStatus.getSelectedItem().equals(0) ||
+                            (editName.getText().toString().equals("")) || (editPhone.getText().toString().equals("")) || (editEmail.getText().toString().equals(""))) {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
+                    //Save Course
+                    courseID = 0;
+                    courseTitle = editTitle.getText().toString();
+                    startDate = editStartDate.getText().toString();
+                    endDate = editEndDate.getText().toString();
+                    status = editStatus.getSelectedItem().toString();
+                    instructorName = editName.getText().toString();
+                    instructorPhone = editPhone.getText().toString();
+                    instructorEmail = editEmail.getText().toString();
+                    int termID = currentTerm.getTermID();
 
-                Course course;
-                course = new Course(courseID, courseTitle, startDate, endDate, status, instructorName, instructorPhone, instructorEmail, termID);
-                repo.insertCourse(course);
-                System.out.println(currentTerm.getTermTitle() + "added: " + course.getCourseTitle());
-                recreate();
-                alertDialog.dismiss();
+                    Course course;
+                    course = new Course(courseID, courseTitle, startDate, endDate, status, instructorName, instructorPhone, instructorEmail, termID);
+                    repo.insertCourse(course);
+                    System.out.println(currentTerm.getTermTitle() + "added: " + course.getCourseTitle());
+                    recreate();
+                    alertDialog.dismiss();
+                } catch (Exception e) {
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -294,16 +307,25 @@ public class TermDetail extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save Term
-                int termID = getIntent().getIntExtra("id", -1);
-                String termTitle = editTitle.getText().toString();
-                startDate = editStartDate.getText().toString();
-                endDate = editEndDate.getText().toString();
-                Term term;
-                term = new Term(termID, termTitle, startDate, endDate);
-                repo.updateTerm(term);
-                recreate();
-                alertDialog.dismiss();
+                try {
+                    //check for empty values
+                    if ((editTitle.getText().toString().equals("")) || (editStartDate.getText().toString()).equals("") || (editEndDate.getText().toString().equals(""))) {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
+                    //Save Term
+                    int termID = getIntent().getIntExtra("id", -1);
+                    String termTitle = editTitle.getText().toString();
+                    startDate = editStartDate.getText().toString();
+                    endDate = editEndDate.getText().toString();
+                    Term term;
+                    term = new Term(termID, termTitle, startDate, endDate);
+                    repo.updateTerm(term);
+                    recreate();
+                    alertDialog.dismiss();
+                } catch (Exception e) {
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -316,20 +338,29 @@ public class TermDetail extends AppCompatActivity {
     }
 
     public void deleteTerm(){
-        List<Course> courses = repo.getAllCourse();
-        for (Course course: courses){
-            if(course.getTermID() == currentTerm.getTermID()) {
-                RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                Snackbar.make(recyclerView, "Term has associated Courses. Cannot Delete.", Snackbar.LENGTH_LONG).show();
-                break;
-            }
-            else{
-                repo.deleteTerm(currentTerm);
-                this.finish();
-                recreate();
+
+        int numCourse = 0;
+        for (Course course: repo.getAllCourse()) {
+            if (course.getTermID() == currentTerm.getTermID()) {
+                ++numCourse;
             }
         }
+        if(numCourse == 0) {
+            for(Term term: repo.getAllTerms()){
+                if (currentTerm.getTermID() == term.getTermID()){
+                    repo.deleteTerm(term);
+                    break;
+                }
+            }
+            finish();
+        }
+        else
+        {
+            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+            Snackbar.make(recyclerView, "Term has associated Courses. Cannot Delete.", Snackbar.LENGTH_LONG).show();
+        }
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate((R.menu.appbar_menu_detail), menu);
@@ -360,6 +391,12 @@ public class TermDetail extends AppCompatActivity {
         startDate.setText("Term Start: " + currentTerm.getStartDate());
         endDate.setText("Term End: " + currentTerm.getEndDate());
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
 }

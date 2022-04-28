@@ -11,11 +11,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.c196.abm2_mobileapplication.R;
 import com.c196.abm2_mobileapplication.database.Repository;
 import com.c196.abm2_mobileapplication.model.CourseNotes;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class NoteDetail extends AppCompatActivity{
@@ -84,9 +88,9 @@ public class NoteDetail extends AppCompatActivity{
         return super.onOptionsItemSelected(menuItem);
     }
     public void deleteNote(){
-        this.finish();
+
         repository.deleteNote(currentNote);
-        recreate();
+        this.finish();
     }
 
     public void editNote(){
@@ -109,7 +113,13 @@ public class NoteDetail extends AppCompatActivity{
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save Course
+                //Save Note
+                try {
+                    //check for empty values
+                    if ((editTitle.getText().toString().equals("")) || (editBody.getText().toString()).equals(""))
+                    {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
                 int noteID = currentNote.getNoteKey();
                 String noteTitle = editTitle.getText().toString();
                 String noteBody = editBody.getText().toString();
@@ -121,6 +131,11 @@ public class NoteDetail extends AppCompatActivity{
                 recreate();
                 alertDialog.dismiss();
             }
+            catch (Exception e) {
+                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+            }
+        }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +144,12 @@ public class NoteDetail extends AppCompatActivity{
                 alertDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
 }

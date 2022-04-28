@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageCourse"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_twotone_library_books_24" />
+
+    <EditText
+        android:id="@+id/courseTitleText"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:hint="Course Title"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/imageCourse"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/courseStartText"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:focusable="false"
+        android:hint="Course Start Date"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/imageCourse"
+        app:layout_constraintTop_toBottomOf="@+id/courseTitleText" />
+
+    <EditText
+        android:id="@+id/courseEndText"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:focusable="false"
+        android:hint="Course End Date"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/courseStartText"
+        app:layout_constraintTop_toBottomOf="@+id/courseTitleText" />
+
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:defaultFocusHighlightEnabled="false"
+        android:entries="@array/status_array"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/imageCourse"
+        app:layout_constraintTop_toBottomOf="@+id/courseEndText" />
+
+    <EditText
+        android:id="@+id/instructorName"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:hint="Course Instructor"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/imageCourse"
+        app:layout_constraintTop_toBottomOf="@id/statusSpinner" />
+
+    <EditText
+        android:id="@+id/instructorPhone"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:hint="Instructor Phone Number"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/imageCourse"
+        app:layout_constraintTop_toBottomOf="@+id/instructorName" />
+
+    <EditText
+        android:id="@+id/instructorEmail"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:hint="Instructor Email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/instructorPhone"
+        app:layout_constraintTop_toBottomOf="@+id/instructorName" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/secondary"
+        android:minWidth="100dp"
+        android:minHeight="48dp"
+        android:text="Save"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cancelButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/instructorPhone"
+        app:layout_constraintTop_toBottomOf="@+id/instructorEmail" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/secondary"
+        android:minWidth="100dp"
+        android:minHeight="50dp"
+        android:text="Cancel"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/instructorEmail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toBottomOf="@+id/instructorEmail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CourseDetail extends AppCompatActivity {
 
@@ -223,6 +224,14 @@ public class CourseDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Save Assessment
+                try {
+                    //check for empty values
+                    if ((editTitle.getText().toString().equals("")) || (editStartDate.getText().toString()).equals("") ||
+                            (editEndDate.getText().toString().equals("")))
+                    {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
+
                 assessmentID = 0;
                 assessmentTitle = editTitle.getText().toString();
                 startDate = editStartDate.getText().toString();
@@ -236,12 +245,19 @@ public class CourseDetail extends AppCompatActivity {
                 recreate();
                 alertDialog.dismiss();
             }
+
+                catch (Exception e){
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
+            }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                recreate();
             }
         });
     }
@@ -307,8 +323,10 @@ public class CourseDetail extends AppCompatActivity {
                 repo.deleteAssessment(assessment);
             }
         }
+
         repo.deleteCourse(currentCourse);
-        recreate();
+        this.finish();
+
     }
 
     public void editCourse(){
@@ -385,6 +403,13 @@ public class CourseDetail extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    //check for empty values
+                    if ((editCourseTitle.getText().toString().equals("")) || (editCourseStart.getText().toString()).equals("") ||
+                            (editCourseEnd.getText().toString().equals("")) ||
+                            (editName.getText().toString().equals("")) || (editPhone.getText().toString().equals("")) || (editEmail.getText().toString().equals(""))) {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
                 //Save Course
                 int courseID = getIntent().getIntExtra("course id", -1);
                 String courseTitle = editCourseTitle.getText().toString();
@@ -401,6 +426,11 @@ public class CourseDetail extends AppCompatActivity {
                 repo.updateCourse(course);
                 recreate();
                 alertDialog.dismiss();
+            }
+                catch (Exception e) {
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -428,7 +458,13 @@ public class CourseDetail extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save Course
+                //Save Note
+                try{
+                    //check for empty values
+                    if((editSubject.getText().toString().equals("")) || (editBody.getText().toString()).equals(""))
+                    {
+                        throw new Exception("All Fields and Selections are Required");
+                    }
                 int noteID = 0;
                 String noteTitle = editSubject.getText().toString();
                 String noteBody = editBody.getText().toString();
@@ -439,6 +475,12 @@ public class CourseDetail extends AppCompatActivity {
                 repo.insertNote(note);
                 recreate();
                 alertDialog.dismiss();
+                }
+
+                catch (Exception e){
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    Snackbar.make(recyclerView, Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -446,6 +488,7 @@ public class CourseDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                recreate();
             }
         });
 
@@ -489,5 +532,11 @@ public class CourseDetail extends AppCompatActivity {
         PendingIntent sender = PendingIntent.getBroadcast(context, MainActivity.numAlert++, intent ,0);
         AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 }
