@@ -35,7 +35,7 @@ public class AssessmentAdapter  extends RecyclerView.Adapter<AssessmentAdapter.A
                     intent.putExtra("start date", currentAssessment.getStartDate());
                     intent.putExtra("end date", currentAssessment.getEndDate());
                     intent.putExtra("course id", currentAssessment.getCourseID());
-                    context.startActivity(intent);
+                    context.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
         }

@@ -286,7 +286,7 @@ public class AssessmentDetail extends AppCompatActivity{
         Long trigger = notifyDate.getTime();
         Intent intent=new Intent(context, NotificationReceiver.class);
         intent.putExtra("key",notification);
-        PendingIntent sender = PendingIntent.getBroadcast(context, MainActivity.numAlert++, intent ,0);
+        PendingIntent sender = PendingIntent.getBroadcast(context, MainActivity.numAlert++, intent ,PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
     }

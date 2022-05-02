@@ -34,7 +34,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     intent.putExtra("title", currentTerm.getTermTitle());
                     intent.putExtra("start date", currentTerm.getStartDate());
                     intent.putExtra("end date", currentTerm.getEndDate());
-                    context.startActivity(intent);
+                    context.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
         }

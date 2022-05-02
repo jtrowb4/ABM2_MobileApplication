@@ -40,7 +40,7 @@ public class CourseAdapter  extends RecyclerView.Adapter<CourseAdapter.CourseVie
                     intent.putExtra("email", currentCourse.getInstructorEmail());
                     intent.putExtra("term id", currentCourse.getTermID());
 
-                    context.startActivity(intent);
+                    context.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
         }
